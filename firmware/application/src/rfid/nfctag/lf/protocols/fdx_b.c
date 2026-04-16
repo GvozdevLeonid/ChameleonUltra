@@ -315,7 +315,6 @@ const protocol fdx_b = {
 uint8_t fdx_b_t55xx_writer(uint8_t *fdx_b_data, uint32_t *blks) {
 
     uint8_t bits[FDX_B_RAW_SIZE];
-    uint8_t bit_to_write;
     fdx_b_raw_data(fdx_b_data, bits);
 
     blks[0] = T5577_FDX_B_CONFIG; 
@@ -326,9 +325,7 @@ uint8_t fdx_b_t55xx_writer(uint8_t *fdx_b_data, uint32_t *blks) {
         for (int bit_idx = 0; bit_idx < 32; bit_idx++) {
             int current_bit_pos = (block_idx * 32) + bit_idx;
 
-            // invert bit  (!bits) because using biphase in config.
-            bit_to_write = bits[current_bit_pos] ? 0 : 1;
-            block_data = (block_data << 1) | bit_to_write;
+            block_data = (block_data << 1) | bits[current_bit_pos];
         }
 
         blks[block_idx + 1] = block_data;

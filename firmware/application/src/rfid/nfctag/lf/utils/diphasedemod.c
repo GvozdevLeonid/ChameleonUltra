@@ -1,7 +1,7 @@
 #include "diphasedemod.h"
 
 void diphase_reset(diphase *d) {
-    d->at_boundary = true; 
+    d->at_boundary = !d->at_boundary; 
 }
 
 void diphase_feed(diphase *d, uint8_t interval, bool *bits, int8_t *bitlen) {

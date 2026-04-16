@@ -60,28 +60,17 @@ void byte_to_bytebits(uint8_t src, uint8_t *dest) {
 }
 
 uint16_t fdx_b_crc(uint8_t *data) {
-    uint16_t crc = 0x0000; 
-
+    uint16_t crc = 0x0000;
     for (uint8_t i = 0; i < 8; i++) {
-        crc ^= (uint16_t)(data[i] << 8);
-
+        crc ^= data[i];
         for (uint8_t j = 0; j < 8; j++) {
-            if (crc & 0x8000) {
-                crc = (crc << 1) ^ 0x1021;
-            } else {
-                crc <<= 1;
-            }
+            if (crc & 1)
+                crc = (crc >> 1) ^ 0x8408;
+            else
+                crc >>= 1;
         }
     }
-
-    uint16_t reflected_crc = 0;
-    for (uint8_t i = 0; i < 16; i++) {
-        if (crc & (1U << i)) {
-            reflected_crc |= (1U << (15 - i));
-        }
-    }
-
-   return reflected_crc;
+    return crc;
 }
 
 static inline bool fdx_b_get_bit(uint64_t raw0, uint64_t raw1, uint8_t idx) {
@@ -325,7 +314,7 @@ uint8_t fdx_b_t55xx_writer(uint8_t *fdx_b_data, uint32_t *blks) {
         for (int bit_idx = 0; bit_idx < 32; bit_idx++) {
             int current_bit_pos = (block_idx * 32) + bit_idx;
 
-            block_data = (block_data << 1) | bits[current_bit_pos];
+            block_data = (block_data << 1) | !bits[current_bit_pos];
         }
 
         blks[block_idx + 1] = block_data;

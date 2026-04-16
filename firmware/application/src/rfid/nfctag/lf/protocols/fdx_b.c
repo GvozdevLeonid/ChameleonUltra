@@ -287,6 +287,8 @@ static const nrf_pwm_sequence_t *fdx_b_modulator(fdx_b_codec *d, uint8_t *buf) {
         m_fdx_b_pwm_seq_vals[i].channel_0 = level ? 16 : 0;
         m_fdx_b_pwm_seq_vals[i].counter_top = 15;
     }
+
+    return &m_fdx_b_pwm_seq;
 }
 
 const protocol fdx_b = {

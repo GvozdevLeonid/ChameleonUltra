@@ -94,18 +94,19 @@
 #define DATA_CMD_EM410X_ELECTRA_WRITE_TO_T55XX  (3006)
 #define DATA_CMD_HIDPROX_SCAN                   (3002)
 #define DATA_CMD_HIDPROX_WRITE_TO_T55XX         (3003)
-#define DATA_CMD_PAC_SCAN                       (3014)
-#define DATA_CMD_PAC_WRITE_TO_T55XX             (3015)
 #define DATA_CMD_VIKING_SCAN                    (3004)
 #define DATA_CMD_VIKING_WRITE_TO_T55XX          (3005)
-#define DATA_CMD_ADC_GENERIC_READ               (3009)
 #define DATA_CMD_GENERIC_READ                   (3007)
 #define DATA_CMD_CORR_GENERIC_READ              (3008)
+#define DATA_CMD_ADC_GENERIC_READ               (3009)
 #define DATA_CMD_IOPROX_SCAN                    (3010)
 #define DATA_CMD_IOPROX_WRITE_TO_T55XX          (3011)
 #define DATA_CMD_IOPROX_DECODE_RAW              (3012)
 #define DATA_CMD_IOPROX_COMPOSE_ID              (3013)
-
+#define DATA_CMD_PAC_SCAN                       (3014)
+#define DATA_CMD_PAC_WRITE_TO_T55XX             (3015)
+#define DATA_CMD_FDX_B_SCAN                     (3016)
+#define DATA_CMD_FDX_B_WRITE_TO_T55XX           (3017)
 //
 // ******************************************************************
 
@@ -177,6 +178,8 @@
 #define DATA_CMD_PAC_GET_EMU_ID                 (5007)
 #define DATA_CMD_IOPROX_SET_EMU_ID              (5008)
 #define DATA_CMD_IOPROX_GET_EMU_ID              (5009)
+#define DATA_CMD_FDX_B_SET_EMU_ID               (5010)
+#define DATA_CMD_FDX_B_GET_EMU_ID               (5011)
 
 #define DATA_CMD_EM4X05_SCAN                    (3030)
 #define DATA_CMD_EM4X05_READSNIFF               (3032)

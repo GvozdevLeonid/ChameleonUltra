@@ -67,6 +67,65 @@ type_id_SAK_dict = {
     0x38: "SmartMX with MIFARE Classic 4K",
 }
 
+FDXB_COUNTRY_CODES = {
+    4: "Afghanistan", 8: "Albania", 12: "Algeria", 16: "American Samoa", 20: "Andorra",
+    24: "Angola", 660: "Anguilla", 10: "Antarctica", 28: "Antigua and Barbuda", 32: "Argentina",
+    51: "Armenia", 533: "Aruba", 40: "Austria", 31: "Azerbaijan", 44: "The Bahamas",
+    48: "Bahrain", 50: "Bangladesh", 52: "Barbados", 112: "Belarus", 56: "Belgium",
+    84: "Belize", 204: "Benin", 60: "Bermuda", 64: "Bhutan", 68: "Bolivia",
+    535: "Bonaire", 70: "Bosnia and Herzegovina", 72: "Botswana", 74: "Bouvet Island", 76: "Brazil",
+    86: "British Indian Ocean Territory", 100: "Bulgaria", 854: "Burkina Faso", 132: "Cape Verde", 116: "Cambodia",
+    120: "Cameroon", 124: "Canada", 140: "Central African Republic", 148: "Chad", 152: "Chile",
+    156: "China", 170: "Colombia", 174: "Comoros", 180: "Democratic Republic of the Congo", 178: "Republic of the Congo",
+    184: "Cook Islands", 384: "Ivory Coast", 191: "Croatia", 192: "Cuba", 531: "Curaçao",
+    196: "Cyprus", 203: "Czech Republic", 262: "Djibouti", 212: "Dominica", 214: "Dominican Republic",
+    818: "Egypt", 222: "El Salvador", 232: "Eritrea", 233: "Estonia", 748: "Eswatini",
+    231: "Ethiopia", 238: "Falkland Islands", 234: "Faroe Islands", 242: "Fiji", 246: "Finland",
+    250: "France", 254: "French Guiana", 258: "French Polynesia", 260: "French Southern Territories", 266: "Gabon",
+    270: "The Gambia", 268: "Georgia (country)", 276: "Germany", 288: "Ghana", 292: "Gibraltar",
+    304: "Greenland", 308: "Grenada", 312: "Guadeloupe", 316: "Guam", 320: "Guatemala",
+    831: "Bailiwick of Guernsey", 324: "Guinea", 624: "Guinea-Bissau", 328: "Guyana", 332: "Haiti",
+    336: "Holy See", 340: "Honduras", 344: "Hong Kong", 348: "Hungary", 352: "Iceland",
+    356: "India", 360: "Indonesia", 364: "Iran (Islamic Republic of)", 368: "Iraq", 372: "Republic of Ireland",
+    833: "Isle of Man", 376: "Israel", 380: "Italy", 832: "Jersey", 400: "Jordan",
+    398: "Kazakhstan", 404: "Kenya", 296: "Kiribati", 408: "North Korea", 410: "South Korea",
+    414: "Kuwait", 417: "Kyrgyzstan", 418: "Laos", 428: "Latvia", 422: "Lebanon",
+    426: "Lesotho", 430: "Liberia", 434: "Libya", 438: "Liechtenstein", 440: "Lithuania",
+    442: "Luxembourg", 446: "Macau", 807: "North Macedonia", 450: "Madagascar", 454: "Malawi",
+    458: "Malaysia", 462: "Maldives", 466: "Mali", 470: "Malta", 584: "Marshall Islands",
+    474: "Martinique", 478: "Mauritania", 480: "Mauritius", 175: "Mayotte", 484: "Mexico",
+    583: "Federated States of Micronesia", 498: "Moldova", 492: "Monaco", 496: "Mongolia", 499: "Montenegro",
+    500: "Montserrat", 504: "Morocco", 508: "Mozambique", 104: "Myanmar", 516: "Namibia",
+    520: "Nauru", 524: "Nepal", 528: "Kingdom of the Netherlands", 540: "New Caledonia", 554: "New Zealand",
+    558: "Nicaragua", 562: "Niger", 566: "Nigeria", 570: "Niue", 574: "Norfolk Island",
+    578: "Norway", 512: "Oman", 586: "Pakistan", 585: "Palau", 275: "State of Palestine",
+    591: "Panama", 598: "Papua New Guinea", 600: "Paraguay", 608: "Philippines", 612: "Pitcairn Islands",
+    616: "Poland", 620: "Portugal", 630: "Puerto Rico", 634: "Qatar", 638: "Réunion",
+    642: "Romania", 643: "Russia", 646: "Rwanda", 654: "Saint Helena", 659: "Saint Kitts and Nevis",
+    662: "Saint Lucia", 663: "Collectivity of Saint Martin", 666: "Saint Pierre and Miquelon", 670: "Saint Vincent and the Grenadines",
+    882: "Samoa", 674: "San Marino", 678: "São Tomé and Príncipe", 682: "Saudi Arabia", 688: "Serbia",
+    690: "Seychelles", 694: "Sierra Leone", 702: "Singapore", 703: "Slovakia", 705: "Slovenia",
+    90: "Solomon Islands", 706: "Somalia", 710: "South Africa", 239: "South Georgia and the South Sandwich Islands", 724: "Spain",
+    144: "Sri Lanka", 729: "Sudan", 740: "Suriname", 744: "Svalbard", 752: "Sweden",
+    756: "Switzerland", 760: "Syria", 158: "Taiwan", 762: "Tajikistan", 834: "Tanzania",
+    764: "Thailand", 626: "East Timor", 768: "Togo", 772: "Tokelau", 776: "Tonga",
+    780: "Trinidad and Tobago", 788: "Tunisia", 792: "Turkey", 795: "Turkmenistan", 796: "Turks and Caicos Islands",
+    798: "Tuvalu", 800: "Uganda", 804: "Ukraine", 784: "United Arab Emirates", 826: "United Kingdom",
+    581: "United States Minor Outlying Islands", 840: "United States", 860: "Uzbekistan", 548: "Vanuatu",
+    704: "Vietnam", 92: "British Virgin Islands", 850: "United States Virgin Islands", 732: "Western Sahara",
+    887: "Yemen", 894: "Zambia", 716: "Zimbabwe",
+
+    # Manufacturers list
+    952: "JECTA", 953: "Cromasa Identificacion electronica S.A.", 955: "Reseaumatique", 956: "Trovan Ltd. (ACK Reunite)",
+    958: "Pet ID", 959: "Global ID Technologies", 961: "Mannings I.A.I.D.", 963: "Korth Eletro Mecanica LTDA",
+    965: "4D Technology Co. Ltd", 966: "PetCode", 967: "Rfdynamics / M4S ID in Canada", 968: "AEG / EIDAP in Canada",
+    972: "Planet ID", 975: "Sokymat", 977: "AVID", 978: "Ordicam",
+    981: "Microfindr, Datamars, Found Animals, Crystal Tag, Banfield, Bayer resQ, Peeva",
+    982: "24 Pet Watch (Allflex)", 985: "HomeAgain (Destron Fearing/Digital Angel)", 991: "Peeva",
+    999: "Test range", 0: "n/a",
+}
+
+
 default_cwd = Path.cwd() / Path(__file__).with_name("bin")
 
 
@@ -718,6 +777,78 @@ class LFVikingIdArgsUnit(DeviceRequiredUnit):
         raise NotImplementedError("Please implement this")
 
 
+class LFFDXBIdArgsUnit(DeviceRequiredUnit):
+    @staticmethod
+    def add_card_arg(parser: ArgumentParserNoExit, required=False):
+        group = parser.add_mutually_exclusive_group(required=required)
+        group.add_argument("--id", type=int, help="National ID (up to 38 bits)", metavar="<int>")
+        group.add_argument("--raw", type=str, help="Raw 11 bytes (22 hex chars)", metavar="<hex>")
+
+        parser.add_argument("--cc", type=int, default=999, help="Country Code (10 bits, default: 999)", metavar="<int>")
+        parser.add_argument("--animal", action="store_true", help="Set Animal flag (Bit 63)")
+
+        parser.add_argument("--extra-flag", action="store_true", help="Set Extra Data Valid flag (Bit 48)")
+        parser.add_argument("--extra", type=str, help="Extra data (6 hex chars, 3 bytes)", default="000000", metavar="<hex>")
+        return parser
+
+    @staticmethod
+    def compose_fdxb(national_id: int, country_code: int, is_animal: bool, has_extra_flag: bool, extra_hex: str) -> bytes:
+        if national_id >= (1 << 38):
+            raise ArgsParserError("National ID exceeds 38-bit limit")
+        if country_code >= (1 << 10):
+            raise ArgsParserError("Country Code exceeds 10-bit limit")
+
+        extra = bytes.fromhex(extra_hex)
+        if len(extra) != 3:
+            raise ArgsParserError("Extra data must be exactly 3 bytes (6 hex chars)")
+
+        dest = bytearray(11)
+        # 1. National ID (38 bits)
+        dest[0] = national_id & 0xFF
+        dest[1] = (national_id >> 8) & 0xFF
+        dest[2] = (national_id >> 16) & 0xFF
+        dest[3] = (national_id >> 24) & 0xFF
+        dest[4] = (national_id >> 32) & 0x3F 
+
+        # 2. Country Code (10 bits)
+        dest[4] |= (country_code & 0x03) << 6
+        dest[5] = (country_code >> 2) & 0xFF
+
+        # 3. extra data flag
+        if has_extra_flag or extra_hex != "000000":
+            dest[6] |= 0x01
+
+        # 4. animal flag
+        if is_animal:
+            dest[7] |= 0x80
+
+        # 5. Extra Data
+        dest[8:11] = extra
+
+        return bytes(dest)
+
+    def before_exec(self, args: argparse.Namespace):
+        if not super().before_exec(args):
+            return False
+
+        if hasattr(args, 'raw') and args.raw is not None:
+            if not re.match(r"^[a-fA-F0-9]{22}$", args.raw):
+                raise ArgsParserError("Raw must be exactly 22 hex characters (11 bytes)")
+            self.id_bytes = bytes.fromhex(args.raw)
+        elif hasattr(args, 'id') and args.id is not None:
+            self.id_bytes = self.compose_fdxb(args.id, args.cc, args.animal, args.extra_flag, args.extra)
+        else:
+            self.id_bytes = None
+
+        return True
+
+    def args_parser(self) -> ArgumentParserNoExit:
+        raise NotImplementedError()
+
+    def on_exec(self, args: argparse.Namespace):
+        raise NotImplementedError()
+
+
 class TagTypeArgsUnit(DeviceRequiredUnit):
     @staticmethod
     def add_type_args(parser: ArgumentParserNoExit):
@@ -763,6 +894,7 @@ lf_hid_prox = lf_hid.subgroup("prox", "HID Prox commands")
 lf_ioprox = lf.subgroup("ioprox", "ioProx commands")
 lf_pac = lf.subgroup("pac", "PAC/Stanley commands")
 lf_viking = lf.subgroup("viking", "Viking commands")
+lf_fdxb = lf.subgroup("fdxb", "FDX-B commands")
 lf_generic = lf.subgroup("generic", "Generic commands")
 
 
@@ -6242,6 +6374,48 @@ class LFVikingWriteT55xx(LFVikingIdArgsUnit, ReaderRequiredUnit):
         print(f" - Viking ID(8H): {id_hex} write done.")
 
 
+@lf_fdxb.command('read')
+class LFFDXBRead(ReaderRequiredUnit):
+    def args_parser(self) -> ArgumentParserNoExit:
+        parser = ArgumentParserNoExit()
+        parser.description = 'Scan FDX-B tag and print data'
+        return parser
+
+    def on_exec(self, args: argparse.Namespace):
+        data = self.cmd.fdx_b_scan()
+
+        national_id = data[0] | (data[1] << 8) | (data[2] << 16) | (data[3] << 24) | ((data[4] & 0x3F) << 32)
+        country_code = ((data[4] >> 6) & 0x03) | (data[5] << 2)
+
+        extra_valid_flag = bool(data[6] & 0x01)
+        animal_flag = bool(data[7] & 0x80)
+
+        extra = data[8:11]
+        cc_name = FDXB_COUNTRY_CODES.get(country_code, "Unknown")
+
+        print(f" FDX-B Tag:")
+        print(f"   National ID  : {color_string((CG, national_id))}")
+        print(f"   Country/Mfr  : {color_string((CY, f'{country_code} ({cc_name})'))}")
+        print(f"   Animal Flag  : {color_string((CG, 'Yes' if animal_flag else 'No'))}")
+        print(f"   Extra Valid  : {color_string((CG, 'Yes' if extra_valid_flag else 'No'))}")
+
+        extra_color = CC if extra_valid_flag else C0
+        print(f"   Extra Data   : {color_string((extra_color, extra.hex().upper()))}")
+        print(f"   Raw 11 bytes : {data.hex().upper()}")
+
+
+@lf_fdxb.command('write')
+class LFFDXBWriteT55xx(LFFDXBIdArgsUnit, ReaderRequiredUnit):
+    def args_parser(self) -> ArgumentParserNoExit:
+        parser = ArgumentParserNoExit()
+        parser.description = 'Write FDX-B data to T55xx'
+        return self.add_card_arg(parser, required=True)
+
+    def on_exec(self, args: argparse.Namespace):
+        self.cmd.fdx_b_write_to_t55xx(self.id_bytes)
+        print(f" - FDX-B write done | Raw: {self.id_bytes.hex().upper()}")
+
+
 @lf_generic.command("adcread")
 class LFADCGenericRead(ReaderRequiredUnit):
     def args_parser(self) -> ArgumentParserNoExit:
@@ -6477,6 +6651,25 @@ class HWSlotList(DeviceRequiredUnit):
                     raw = pac_encode_raw(id)
                     print(f"      {'CN:':40}{color_string((CY, id_ascii))}")
                     print(f"      {'Raw:':40}{color_string((CY, raw.hex().upper()))}")
+
+                if lf_tag_type == TagSpecificType.FDX_B:
+                    response = self.cmd.fdx_b_get_emu_id()
+                    
+                    national_id = response[0] | (response[1] << 8) | (response[2] << 16) | (response[3] << 24) | ((response[4] & 0x3F) << 32)
+                    country_code = ((response[4] >> 6) & 0x03) | (response[5] << 2)
+                    extra_valid_flag = bool(response[6] & 0x01)
+                    animal_flag = bool(response[7] & 0x80)
+                    extra = response[8:11]
+                    cc_name = FDXB_COUNTRY_CODES.get(country_code, "Unknown")
+
+                    print(f"      {'National ID:':40}{color_string((CG, national_id))}")
+                    print(f"      {'Country/Mfr:':40}{color_string((CY, f'{country_code} ({cc_name})'))}")
+                    print(f"      {'Animal Flag:':40}{color_string((CG, 'Yes' if animal_flag else 'No'))}")
+                    print(f"      {'Extra Valid:':40}{color_string((CG, 'Yes' if extra_valid_flag else 'No'))}")
+                    
+                    extra_color = CC if extra_valid_flag else C0
+                    print(f"      {'Extra Data:':40}{color_string((extra_color, extra.hex().upper()))}")
+                    print(f"      {'Raw:':40}{color_string((CY, response.hex().upper()))}")
         if current != selected:
             self.cmd.set_active_slot(selected)
 
@@ -6625,19 +6818,48 @@ class LFVikingEconfig(SlotIndexArgsAndGoUnit, LFVikingIdArgsUnit):
         return parser
 
     def on_exec(self, args: argparse.Namespace):
-        if args.id is not None:
+        if self.id_bytes is not None:
             slotinfo = self.cmd.get_slot_info()
             selected = SlotNumber.from_fw(self.cmd.get_active_slot())
-            lf_tag_type = TagSpecificType(slotinfo[selected - 1]["lf"])
-            if lf_tag_type != TagSpecificType.Viking:
-                print(f"{color_string((CR, 'WARNING'))}: Slot type not set to Viking.")
-            self.cmd.viking_set_emu_id(bytes.fromhex(args.id))
-            print(" - Set Viking tag id success.")
+            lf_tag_type = TagSpecificType(slotinfo[selected - 1]['lf'])
+            
+            if lf_tag_type != TagSpecificType.FDX_B:
+                print(f"{color_string((CR, 'WARNING'))}: Slot type not set to FDX-B.")
+                
+            self.cmd.fdx_b_set_emu_id(self.id_bytes)
+            print(f' - Set FDX-B tag ID success. Raw: {self.id_bytes.hex().upper()}')
         else:
-            response = self.cmd.viking_get_emu_id()
-            print(" - Get Viking tag id success.")
-            print(f"ID: {response.hex().upper()}")
+            response = self.cmd.fdx_b_get_emu_id()
+            
+            national_id = response[0] | (response[1] << 8) | (response[2] << 16) | (response[3] << 24) | ((response[4] & 0x3F) << 32)
+            country_code = ((response[4] >> 6) & 0x03) | (response[5] << 2)
 
+            extra_valid_flag = bool(response[6] & 0x01)
+            animal_flag = bool(response[7] & 0x80)
+
+            extra = response[8:11]
+            
+            cc_name = FDXB_COUNTRY_CODES.get(country_code, "Unknown")
+            
+            print(' - Get FDX-B tag ID success.')
+            print(f"   National ID  : {color_string((CG, national_id))}")
+            print(f"   Country/Mfr  : {color_string((CY, f'{country_code} ({cc_name})'))}")
+            print(f"   Animal Flag  : {color_string((CG, 'Yes' if animal_flag else 'No'))}")
+            print(f"   Extra Valid  : {color_string((CG, 'Yes' if extra_valid_flag else 'No'))}")
+
+            extra_color = CC if extra_valid_flag else C0
+            print(f"   Extra Data   : {color_string((extra_color, extra.hex().upper()))}")
+            print(f"   Raw 11 bytes : {response.hex().upper()}")
+
+
+@lf_fdxb.command('econfig')
+class LFFDXBEconfig(SlotIndexArgsAndGoUnit, LFFDXBIdArgsUnit):
+    def args_parser(self) -> ArgumentParserNoExit:
+        parser = ArgumentParserNoExit()
+        parser.description = 'Set/Get emulated FDX-B card ID'
+        self.add_slot_args(parser)
+        self.add_card_arg(parser)
+        return parser
 
 @hw_slot.command("nick")
 class HWSlotNick(SlotIndexArgsUnit, SenseTypeArgsUnit):

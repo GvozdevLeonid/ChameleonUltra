@@ -84,13 +84,15 @@ class Command(enum.IntEnum):
     HIDPROX_WRITE_TO_T55XX = 3003
     VIKING_SCAN = 3004
     VIKING_WRITE_TO_T55XX = 3005
-    PAC_SCAN = 3014
-    PAC_WRITE_TO_T55XX = 3015
     ADC_GENERIC_READ = 3009
     IOPROX_SCAN = 3010
     IOPROX_WRITE_TO_T55XX = 3011
     IOPROX_DECODE_RAW = 3012
     IOPROX_COMPOSE_ID = 3013
+    PAC_SCAN = 3014
+    PAC_WRITE_TO_T55XX = 3015
+    FDX_B_SCAN = 3016
+    FDX_B_WRITE_TO_T55XX = 3017
 
     MF1_WRITE_EMU_BLOCK_DATA = 4000
     HF14A_SET_ANTI_COLL_DATA = 4001
@@ -148,6 +150,9 @@ class Command(enum.IntEnum):
     PAC_GET_EMU_ID = 5007
     IOPROX_SET_EMU_ID = 5008
     IOPROX_GET_EMU_ID = 5009
+    FDX_B_SET_EMU_ID = 5010
+    FDX_B_GET_EMU_ID = 5011
+
     EM4X05_SCAN = 3030
     EM4X05_READSNIFF = 3032
     LF_SNIFF = 3031
@@ -281,6 +286,7 @@ class TagSpecificType(enum.IntEnum):
     EM410X_64 = 103
     EM410X_ELECTRA = 104
     # FDX-B
+    FDX_B = 110
     # securakey
     # gallagher
     # PAC/Stanley
@@ -382,6 +388,8 @@ class TagSpecificType(enum.IntEnum):
             return "PAC/Stanley"
         elif self == TagSpecificType.Viking:
             return "Viking"
+        elif self == TagSpecificType.FDX_B:
+            return "FDX-B"
         elif self == TagSpecificType.MIFARE_Mini:
             return "Mifare Mini"
         elif self == TagSpecificType.MIFARE_1024:

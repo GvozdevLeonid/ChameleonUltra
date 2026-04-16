@@ -11,6 +11,7 @@
 #include "protocols/t55xx.h"
 #include "protocols/pac.h"
 #include "protocols/viking.h"
+#include "protocols/fdx_b.h"
 
 #define NRF_LOG_MODULE_NAME lf_main
 #include "nrf_log.h"
@@ -96,6 +97,16 @@ uint8_t scan_pac(uint8_t *card_id) {
  */
 uint8_t scan_viking(uint8_t *uid) {
     if (viking_read(uid, g_timeout_readem_ms)) {
+        return STATUS_LF_TAG_OK;
+    }
+    return STATUS_LF_TAG_NO_FOUND;
+}
+
+/**
+ * Search FDX-B tag
+ */
+uint8_t scan_fdx_b(uint8_t *uid) {
+    if (fdx_b_read(uid, g_timeout_readem_ms)) {
         return STATUS_LF_TAG_OK;
     }
     return STATUS_LF_TAG_NO_FOUND;
@@ -192,6 +203,19 @@ uint8_t write_ioprox_to_t55xx(uint8_t *card_data, uint8_t *new_passwd, uint8_t *
 uint8_t write_viking_to_t55xx(uint8_t *uid, uint8_t *new_passwd, uint8_t *old_passwds, uint8_t old_passwd_count) {
     uint32_t blks[7] = {0x00};
     uint8_t blk_count = viking_t55xx_writer(uid, blks);
+    if (blk_count == 0) {
+        return STATUS_PAR_ERR;
+    }
+    return write_t55xx(blks, blk_count, new_passwd, old_passwds, old_passwd_count);
+}
+
+/**
+ * Write FDX-B card data to t55xx
+ */
+uint8_t write_fdx_b_to_t55xx(uint8_t *uid, uint8_t *new_passwd, uint8_t *old_passwds, uint8_t old_passwd_count) {
+    // Prepare T5577 block array: index 0 = config word, 1-4 = data blocks
+    uint32_t blks[5] = {0x00};
+    uint8_t blk_count = fdx_b_t55xx_writer(uid, blks);
     if (blk_count == 0) {
         return STATUS_PAR_ERR;
     }

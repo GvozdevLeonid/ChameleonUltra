@@ -13,6 +13,7 @@
 #include "protocols/ioprox.h"
 #include "protocols/pac.h"
 #include "protocols/viking.h"
+#include "protocols/fdx_b.h"
 #include "syssleep.h"
 #include "tag_emulation.h"
 #include "tag_persistence.h"
@@ -253,6 +254,15 @@ int lf_tag_data_loadcb(tag_specific_type_t type, tag_data_buffer_t *buffer) {
         return LF_PAC_TAG_ID_SIZE;
     }
 
+    if (type == TAG_TYPE_FDX_B && buffer->length >= LF_FDX_B_TAG_ID_SIZE) {
+        m_tag_type = type;
+        void *codec = fdx_b.alloc();
+        m_pwm_seq = fdx_b.modulator(codec, buffer->buffer);
+        fdx_b.free(codec);
+        NRF_LOG_INFO("load lf fdx-b data finish.");
+        return LF_PAC_TAG_ID_SIZE;
+    }
+
     NRF_LOG_ERROR("no valid data exists in buffer for tag type: %d.", type);
     return 0;
 }
@@ -305,6 +315,17 @@ int lf_tag_viking_data_savecb(tag_specific_type_t type, tag_data_buffer_t *buffe
     // Make sure to load this tag before allowing saving
     // Just save the original card package directly
     return m_tag_type == TAG_TYPE_VIKING ? LF_VIKING_TAG_ID_SIZE : 0;
+}
+
+/** @brief Id card deposit card number before callback
+ * @param type      Refined tag type
+ * @param buffer    Data buffer
+ * @return The length of the data that needs to be saved is that it does not save when 0
+ */
+int lf_tag_fdx_b_data_savecb(tag_specific_type_t type, tag_data_buffer_t *buffer) {
+    // Make sure to load this tag before allowing saving
+    // Just save the original card package directly
+    return m_tag_type == TAG_TYPE_FDX_B ? LF_FDX_B_TAG_ID_SIZE : 0;
 }
 
 bool lf_tag_data_factory(uint8_t slot, tag_specific_type_t tag_type, uint8_t *tag_id, uint16_t length) {
@@ -373,6 +394,16 @@ bool lf_tag_ioprox_data_factory(uint8_t slot, tag_specific_type_t tag_type) {
 bool lf_tag_viking_data_factory(uint8_t slot, tag_specific_type_t tag_type) {
     // default id
     uint8_t tag_id[4] = {0xDE, 0xAD, 0xBE, 0xEF};
+    return lf_tag_data_factory(slot, tag_type, tag_id, sizeof(tag_id));
+}
+
+/** @brief Id card deposit card number before callback
+ * @param slot      Card slot number
+ * @param tag_type  Refined tag type
+ * @return Whether the format is successful, if the formatting is successful, it will return to True, otherwise False will be returned
+ */
+bool lf_tag_fdx_b_data_factory(uint8_t slot, tag_specific_type_t tag_type) {
+    uint8_t tag_id[11] = {0x00, 0x00, 0x00, 0x00, 0xC0, 0xF9, 0x00, 0x80, 0x00, 0x00, 0x00};
     return lf_tag_data_factory(slot, tag_type, tag_id, sizeof(tag_id));
 }
 

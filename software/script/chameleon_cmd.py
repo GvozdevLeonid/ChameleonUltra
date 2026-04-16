@@ -664,6 +664,26 @@ class ChameleonCMD:
         return self.device.send_cmd_sync(Command.PAC_WRITE_TO_T55XX, data)
 
     @expect_response(Status.LF_TAG_OK)
+    def fdx_b_scan(self):
+        """
+        Read the card data of FDX-B (11 bytes).
+        """
+        resp = self.device.send_cmd_sync(Command.FDX_B_SCAN)
+        if resp.status == Status.LF_TAG_OK:
+            resp.parsed = resp.data[:11]
+        return resp
+
+    @expect_response(Status.LF_TAG_OK)
+    def fdx_b_write_to_t55xx(self, id_bytes: bytes):
+        """
+        Write FDX-B card data to a T55XX tag.
+        """
+        if len(id_bytes) != 11:
+            raise ValueError("The FDX-B id bytes length must equal 11")
+        data = struct.pack(f'!11s4s{4*len(old_keys)}s', id_bytes, new_key, b''.join(old_keys))
+        return self.device.send_cmd_sync(Command.FDX_B_WRITE_TO_T55XX, data)
+
+    @expect_response(Status.LF_TAG_OK)
     def adc_generic_read(self):
         """
         Read the ADC when the field is on.
@@ -916,6 +936,25 @@ class ChameleonCMD:
         """
         resp = self.device.send_cmd_sync(Command.PAC_GET_EMU_ID)
         resp.parsed = resp.data[:8]
+        return resp
+
+    @expect_response(Status.SUCCESS)
+    def fdx_b_set_emu_id(self, id_bytes: bytes):
+        """
+        Set the card ID emulated by FDX-B.
+        """
+        if len(id_bytes) != 11:
+            raise ValueError("The FDX-B id bytes length must equal 11")
+        data = struct.pack('11s', id_bytes)
+        return self.device.send_cmd_sync(Command.FDX_B_SET_EMU_ID, data)
+
+    @expect_response(Status.SUCCESS)
+    def fdx_b_get_emu_id(self):
+        """
+        Get the emulated FDX-B card ID.
+        """
+        resp = self.device.send_cmd_sync(Command.FDX_B_GET_EMU_ID)
+        resp.parsed = resp.data[:11]
         return resp
 
     @expect_response(Status.SUCCESS)

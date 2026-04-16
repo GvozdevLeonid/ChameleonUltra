@@ -40,6 +40,7 @@ typedef enum {
     TAG_TYPE_EM410X_64,
     TAG_TYPE_EM410X_ELECTRA,
     // FDX-B
+    TAG_TYPE_FDX_B = 110,
     // securakey
     // gallagher
     // PAC/Stanley

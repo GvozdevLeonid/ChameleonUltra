@@ -20,7 +20,7 @@ void diphase_feed(diphase *d, uint8_t interval, bool *bits, int8_t *bitlen) {
             *bitlen = 1;
             bits[0] = 0;
             d->at_boundary = false; 
-            
+
         } else if (t == 1) {
             // 1T = 0
 
@@ -28,14 +28,14 @@ void diphase_feed(diphase *d, uint8_t interval, bool *bits, int8_t *bitlen) {
             bits[0] = 1;
             d->at_boundary = true;
         }
-        
+
     } else {
         if (t == 0) {
             // 0.5T. bit 0 completed
 
             *bitlen = 0; 
             d->at_boundary = true; 
-            
+
         } else {
             // PROTOCOL ERROR
             d->at_boundary = true;

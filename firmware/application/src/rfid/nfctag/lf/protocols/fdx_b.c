@@ -28,7 +28,6 @@
 #define FDX_B_TIME_FULL     (32) // 1.0T
 #define FDX_B_JITTER        (6)
 
-
 #define NRF_LOG_MODULE_NAME fdx_b_protocol
 #include "nrf_log.h"
 #include "nrf_log_ctrl.h"

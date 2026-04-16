@@ -24,9 +24,10 @@
 #define FDX_B_HEADER        (0x001)
 #define FDX_B_T55XX_BLOCK_COUNT (5)
 
-#define FDX_B_TIME_HALF     (16) // 0.5T
-#define FDX_B_TIME_FULL     (32) // 1.0T
-#define FDX_B_JITTER        (6)
+#define FDX_B_TIME_1    (32) // 1T
+#define FDX_B_TIME_2    (48) // 1.5T
+#define FDX_B_TIME_3    (64) // 1.5T
+#define FDX_B_JITTER_TIME  (8)
 
 #define NRF_LOG_MODULE_NAME fdx_b_protocol
 #include "nrf_log.h"
@@ -129,18 +130,21 @@ static void fdx_b_raw_data(uint8_t *fdx_b_data, uint8_t *bits) {
 }
 
 static bool fdx_b_get_time(uint8_t interval, uint8_t base) {
-    return interval >= (base - FDX_B_JITTER) &&
-           interval <= (base + FDX_B_JITTER);
+    return interval >= (base - FDX_B_JITTER_TIME) &&
+           interval <= (base + FDX_B_JITTER_TIME);
 }
 
 static uint8_t fdx_b_period(uint8_t interval) {
-    if (fdx_b_get_time(interval, FDX_B_TIME_HALF)) {
-        return 0; // 0.5T
+    if (fdx_b_get_time(interval, FDX_B_TIME_1)) {
+        return 0; // 1T
     }
-    if (fdx_b_get_time(interval, FDX_B_TIME_FULL)) {
-        return 1; // 1.0T
+    if (fdx_b_get_time(interval, FDX_B_TIME_2)) {
+        return 1; // 1.5T
     }
-    return 2; // Noise
+    if (fdx_b_get_time(interval, FDX_B_TIME_3)) {
+        return 2; // 2.0T
+    }
+    return 3; // Noise
 }
 
 
@@ -246,10 +250,10 @@ static bool fdx_b_decode_bit(fdx_b_codec *d, bool bit) {
 }
 
 static bool fdx_b_decoder_feed(fdx_b_codec *d, uint16_t interval) {
-    bool bit = false;
+    bool bits[2] = {0};
     int8_t bitlen = 0;
 
-    diphase_feed(d->modem, (uint8_t)interval, &bit, &bitlen);
+    diphase_feed(d->modem, (uint8_t)interval, bits, &bitlen);
 
     if (bitlen == -1) {
         diphase_reset(d->modem);
@@ -257,8 +261,8 @@ static bool fdx_b_decoder_feed(fdx_b_codec *d, uint16_t interval) {
         return false;
     }
 
-    if (bitlen == 1) {
-        if (fdx_b_decode_bit(d, bit)) {
+    for (int i = 0; i < bitlen; i++) {
+        if (fdx_b_decode_bit(d, bits[i])) {
             return true;
         }
     }

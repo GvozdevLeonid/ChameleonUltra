@@ -5,9 +5,10 @@
 #include <stdint.h>
 
 /*
- * 0 - 0.5T (Half bit)
- * 1 - 1.0T (Full bit)
- * 2 - error/noise (the interval is too long or too short)
+ * 0 - 1T
+ * 1 - 1.5T
+ * 2 - 2T
+ * 3 - error/noise (the interval is too long or too short)
  */
 typedef uint8_t (*period)(uint8_t interval);
 

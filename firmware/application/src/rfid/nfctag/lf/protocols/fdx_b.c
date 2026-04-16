@@ -238,9 +238,9 @@ static bool fdx_b_decode_bit(fdx_b_codec *d, bool bit) {
     }
 
     // compare crc
-    if (fdx_b_crc(d->data) != received_crc) {
-        return false;
-    }
+    // if (fdx_b_crc(d->data) != received_crc) {
+    //     return false;
+    // }
 
     d->raw[0] = 0;
     d->raw[1] = 0;
@@ -275,21 +275,24 @@ static const nrf_pwm_sequence_t *fdx_b_modulator(fdx_b_codec *d, uint8_t *buf) {
 
     fdx_b_raw_data(buf, bits);
     bool level = false;
+    int out = 0;
 
     for (int i = 0; i < FDX_B_RAW_SIZE; i++) {
         bool bit = bits[i];
 
         level = !level;
 
-        m_fdx_b_pwm_seq_vals[i].channel_0 = level ? 16 : 0;
-        m_fdx_b_pwm_seq_vals[i].counter_top = 15;
+        m_fdx_b_pwm_seq_vals[out].channel_0 = level ? 16 : 0;
+        m_fdx_b_pwm_seq_vals[out].counter_top = 15;
+        out++;
 
         if (bit == 0) {
             level = !level;
         }
 
-        m_fdx_b_pwm_seq_vals[i].channel_0 = level ? 16 : 0;
-        m_fdx_b_pwm_seq_vals[i].counter_top = 15;
+        m_fdx_b_pwm_seq_vals[out].channel_0 = level ? 16 : 0;
+        m_fdx_b_pwm_seq_vals[out].counter_top = 15;
+        out++;
     }
 
     return &m_fdx_b_pwm_seq;

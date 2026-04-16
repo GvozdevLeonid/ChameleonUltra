@@ -26,7 +26,7 @@
 
 #define FDX_B_TIME_1    (32) // 1T
 #define FDX_B_TIME_2    (48) // 1.5T
-#define FDX_B_TIME_3    (64) // 1.5T
+#define FDX_B_TIME_3    (64) // 2T
 #define FDX_B_JITTER_TIME  (8)
 
 #define NRF_LOG_MODULE_NAME fdx_b_protocol

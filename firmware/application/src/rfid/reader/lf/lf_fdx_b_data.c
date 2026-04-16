@@ -36,7 +36,7 @@ static void fdx_b_gpio_int0_cb(void) {
 
 static void init_fdx_b_hw(void) {
     register_rio_callback(fdx_b_gpio_int0_cb);
-    lf_125khz_radio_gpiote_toggle_enable();
+    lf_125khz_radio_gpiote_enable();
 }
 
 static void uninit_fdx_b_hw(void) {

@@ -45,14 +45,6 @@ static void gpiote_init(void) {
     APP_ERROR_CHECK(err_code);
 }
 
-static void gpiote_toggle_init(void) {
-    nrfx_err_t err_code;
-
-    nrfx_gpiote_in_config_t cfg = NRFX_GPIOTE_CONFIG_IN_SENSE_TOGGLE(false);
-    err_code = nrfx_gpiote_in_init(LF_OA_OUT, &cfg, lf_125khz_gpio_handler);
-    APP_ERROR_CHECK(err_code);
-}
-
 /**
  * Start the 125kHz broadcast
  */
@@ -146,16 +138,6 @@ void lf_125khz_radio_gpiote_enable(void) {
     APP_ERROR_CHECK(err_code);
 
     gpiote_init();
-    nrfx_timer_enable(&m_pwm_timer_counter);
-    nrfx_gpiote_in_event_enable(LF_OA_OUT, true);
-}
-
-void lf_125khz_radio_gpiote_toggle_enable(void) {
-    nrfx_err_t err_code;
-    err_code = nrfx_ppi_channel_enable(m_pwm_timer_count_ppi_channel);
-    APP_ERROR_CHECK(err_code);
-
-    gpiote_toggle_init();
     nrfx_timer_enable(&m_pwm_timer_counter);
     nrfx_gpiote_in_event_enable(LF_OA_OUT, true);
 }

@@ -198,7 +198,7 @@ static bool fdx_b_decode_bit(fdx_b_codec *d, bool bit) {
     for (int byte_n = 0; byte_n < 8; byte_n++) {
         current_byte = 0;
         for (int b = 0; b < 8; b++) {
-            current_byte = (current_byte << 1) | fdx_b_get_bit(d->raw[0], d->raw[1], bit_idx);
+            current_byte |= (fdx_b_get_bit(d->raw[0], d->raw[1], bit_idx) << b);
             bit_idx++; 
         }
 
@@ -211,7 +211,7 @@ static bool fdx_b_decode_bit(fdx_b_codec *d, bool bit) {
     for (int byte_n = 0; byte_n < 3; byte_n++) {
         current_byte = 0;
         for (int b = 0; b < 8; b++) {
-            current_byte = (current_byte << 1) | fdx_b_get_bit(d->raw[0], d->raw[1], bit_idx);
+            current_byte |= (fdx_b_get_bit(d->raw[0], d->raw[1], bit_idx) << b);
             bit_idx++; 
         }
 
@@ -224,7 +224,7 @@ static bool fdx_b_decode_bit(fdx_b_codec *d, bool bit) {
     for (int byte_n = 0; byte_n < 2; byte_n++) {
         current_byte = 0;
         for (int b = 0; b < 8; b++) {
-            current_byte = (current_byte << 1) | fdx_b_get_bit(d->raw[0], d->raw[1], bit_idx);
+            current_byte |= (fdx_b_get_bit(d->raw[0], d->raw[1], bit_idx) << b);
             bit_idx++; 
         }
 
@@ -238,9 +238,9 @@ static bool fdx_b_decode_bit(fdx_b_codec *d, bool bit) {
     }
 
     // compare crc
-    // if (fdx_b_crc(d->data) != received_crc) {
-    //     return false;
-    // }
+    if (fdx_b_crc(d->data) != received_crc) {
+        return false;
+    }
 
     d->raw[0] = 0;
     d->raw[1] = 0;
